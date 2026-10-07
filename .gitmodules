@@ -42,11 +42,11 @@
 	path = OCA/account-payment
 	url = git@github.com:OCA/account-payment.git
 	branch = 19.0
-[submodule "ingadhoc/odoo-argentina-ee"]
-	path = ingadhoc/odoo-argentina-ee
-	url = git@github.com:ingadhoc/odoo-argentina-ee.git
-	branch = 19.0
 [submodule "OCA/account-financial-reporting"]
 	path = OCA/account-financial-reporting
 	url = git@github.com:OCA/account-financial-reporting.git
+	branch = 19.0
+[submodule "ingadhoc/odoo-argentina-ce"]
+	path = ingadhoc/odoo-argentina-ce
+	url = git@github.com:ingadhoc/odoo-argentina-ce.git
 	branch = 19.0
