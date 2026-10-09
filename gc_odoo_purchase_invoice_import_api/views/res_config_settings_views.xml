@@ -6,7 +6,7 @@
         <field name="inherit_id" ref="account.res_config_settings_view_form"/>
         <field name="arch" type="xml">
             <xpath expr="//div[hasclass('settings')]" position="inside">
-                <div class="app_settings_block" data_key="gc_odoo_purchase_invoice_import_api"
+                <div class="app_settings_block" data-key="gc_odoo_purchase_invoice_import_api"
                      string="Importación de Facturas de Compra (API)">
                     <h2>Importación de Facturas de Compra vía API</h2>
                     <div class="row mt16 o_settings_container">
