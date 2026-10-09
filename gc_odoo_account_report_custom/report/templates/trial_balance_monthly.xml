@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="trial_balance_monthly">
+        <link
+            href="/account_financial_report/static/src/css/report_html.css"
+            rel="stylesheet"
+        />
+        <!-- Ancho completo: son tres columnas por cada mes -->
+        <t t-set="full_width" t-value="True" />
+        <t t-call="web.report_layout">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="account_financial_report.internal_layout">
+                    <t
+                        t-call="gc_odoo_account_report_custom.report_trial_balance_monthly_base"
+                    />
+                </t>
+            </t>
+        </t>
+    </template>
+    <template id="report_trial_balance_monthly_base">
+        <t
+            t-set="amount_options"
+            t-value="{'widget': 'float', 'precision': company_currency.decimal_places}"
+        />
+        <t
+            t-set="aml_domain_common"
+            t-if="only_posted_moves"
+            t-value="[('parent_state', '=', 'posted')]"
+        />
+        <t
+            t-set="aml_domain_common"
+            t-else=""
+            t-value="[('parent_state', 'in', ('posted', 'draft'))]"
+        />
+        <t
+            t-set="amount_columns"
+            t-value="[('debit', 'Debe', [('debit', '!=', 0)]), ('credit', 'Haber', [('credit', '!=', 0)]), ('balance', 'Saldo', [])]"
+        />
+        <div class="page">
+            <div class="row">
+                <h4 class="mt0" style="text-align: center;">
+                    Sumas y saldos mensual -
+                    <t t-out="company_name" />
+                    -
+                    <t t-out="currency_name" />
+                </h4>
+            </div>
+            <t t-call="account_financial_report.report_trial_balance_filters" />
+            <div style="margin-top: 10px; overflow-x: auto;">
+                <table
+                    class="table table-sm table-bordered"
+                    style="table-layout: auto; width: auto; white-space: nowrap; font-size: 12px; background-color: white;"
+                >
+                    <thead style="background-color: #f0f0f0; text-align: center;">
+                        <tr>
+                            <th rowspan="2">Código</th>
+                            <th rowspan="2">Cuenta</th>
+                            <th rowspan="2">Saldo inicial</th>
+                            <th t-foreach="periods" t-as="period" colspan="3">
+                                <t t-out="period['name']" />
+                            </th>
+                            <th colspan="3">Total</th>
+                            <th rowspan="2">Saldo final</th>
+                        </tr>
+                        <tr>
+                            <t t-foreach="periods + [False]" t-as="period">
+                                <th t-foreach="amount_columns" t-as="column">
+                                    <t t-out="column[1]" />
+                                </th>
+                            </t>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="trial_balance" t-as="balance">
+                            <t
+                                t-call="gc_odoo_account_report_custom.report_trial_balance_monthly_line"
+                            />
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </template>
+    <template id="report_trial_balance_monthly_line">
+        <t t-set="is_group" t-value="balance['type'] == 'group_type'" />
+        <t
+            t-set="res_model"
+            t-value="'account.group' if is_group else 'account.account'"
+        />
+        <t
+            t-set="account_domain"
+            t-value="[('account_id.group_id', 'child_of', balance['id']) if is_group else ('account_id', '=', balance['id'])] + aml_domain_common"
+        />
+        <t
+            t-set="range_domain"
+            t-value="[('date', '&gt;=', str(date_from)), ('date', '&lt;=', str(date_to))]"
+        />
+        <tr t-att-style="'font-weight: bold;' if is_group else None">
+            <td>
+                <span
+                    t-att-res-id="balance['id']"
+                    t-att-res-model="res_model"
+                    view-type="form"
+                    t-out="balance['code']"
+                />
+            </td>
+            <td>
+                <span
+                    t-att-res-id="balance['id']"
+                    t-att-res-model="res_model"
+                    view-type="form"
+                    t-out="balance['name']"
+                />
+            </td>
+            <td class="text-end">
+                <span
+                    res-model="account.move.line"
+                    t-att-domain="account_domain + [('date', '&lt;', str(date_from))]"
+                    t-out="balance['initial_balance']"
+                    t-options="amount_options"
+                />
+            </td>
+            <t t-foreach="periods" t-as="period">
+                <t
+                    t-set="period_domain"
+                    t-value="[('date', '&gt;=', str(period['date_from'])), ('date', '&lt;=', str(period['date_to']))]"
+                />
+                <td t-foreach="amount_columns" t-as="column" class="text-end">
+                    <span
+                        res-model="account.move.line"
+                        t-att-domain="account_domain + period_domain + column[2]"
+                        t-out="balance[monthly_field_name(period_index, column[0])]"
+                        t-options="amount_options"
+                    />
+                </td>
+            </t>
+            <td t-foreach="amount_columns" t-as="column" class="text-end">
+                <span
+                    res-model="account.move.line"
+                    t-att-domain="account_domain + range_domain + column[2]"
+                    t-out="balance[column[0]]"
+                    t-options="amount_options"
+                />
+            </td>
+            <td class="text-end">
+                <span
+                    res-model="account.move.line"
+                    t-att-domain="account_domain + [('date', '&lt;=', str(date_to))]"
+                    t-out="balance['ending_balance']"
+                    t-options="amount_options"
+                />
+            </td>
+        </tr>
+    </template>
+</odoo>
