@@ -19,11 +19,6 @@ Key Features / Changes
   - Adds a custom XML report template (`report/aged_partner_balance.xml`).
   - Supports export to XLSX format.
 
-- **Monthly Trial Balance (Sumas y saldos mensual):**
-  - New menu under Accounting > Reporting > OCA accounting reports, next to the Trial Balance.
-  - Same filters as the OCA Trial Balance; shows on screen (with amounts linked to their journal items) or exports to XLSX the Debit / Credit / Balance columns for each month between the selected dates, plus initial balance, period totals and ending balance.
-  - Not supported: partner details, analytic grouping and foreign currency columns.
-
 - **Models:**
   - `account.move` (`models/account_move.py`): Adds or modifies fields and methods to support enhanced reporting and partner/account data.
   - `res.partner` (`models/res_partner.py`): Adds or modifies fields and methods to improve partner-related reporting.

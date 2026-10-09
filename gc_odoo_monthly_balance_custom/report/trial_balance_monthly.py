@@ -13,7 +13,7 @@ class TrialBalanceMonthlyReport(models.AbstractModel):
     original para todo el rango; acá solo se agrega el detalle mensual.
     """
 
-    _name = "report.gc_odoo_account_report_custom.trial_balance_monthly"
+    _name = "report.gc_odoo_monthly_balance_custom.trial_balance_monthly"
     _description = "Sumas y saldos mensual"
     _inherit = "report.account_financial_report.trial_balance"
 

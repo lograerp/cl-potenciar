@@ -17,8 +17,8 @@
         <field name="name">Sumas y saldos mensual</field>
         <field name="model">trial.balance.report.wizard</field>
         <field name="report_type">qweb-html</field>
-        <field name="report_name">gc_odoo_account_report_custom.trial_balance_monthly</field>
-        <field name="report_file">gc_odoo_account_report_custom.trial_balance_monthly</field>
+        <field name="report_name">gc_odoo_monthly_balance_custom.trial_balance_monthly</field>
+        <field name="report_file">gc_odoo_monthly_balance_custom.trial_balance_monthly</field>
         <field name="paperformat_id" ref="paperformat_trial_balance_monthly" />
     </record>
     <record id="action_report_trial_balance_monthly_xlsx" model="ir.actions.report">
@@ -27,7 +27,7 @@
         <field name="type">ir.actions.report</field>
         <field
             name="report_name"
-        >gc_odoo_account_report_custom.trial_balance_monthly_xlsx</field>
+        >gc_odoo_monthly_balance_custom.trial_balance_xlsx</field>
         <field name="report_type">xlsx</field>
         <field name="report_file">sumas_y_saldos_mensual</field>
     </record>

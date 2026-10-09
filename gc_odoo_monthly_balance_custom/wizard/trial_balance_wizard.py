@@ -22,10 +22,10 @@ class TrialBalanceReportWizard(models.TransientModel):
 
     def button_export_monthly_html(self):
         return self._export_monthly(
-            "gc_odoo_account_report_custom.action_report_trial_balance_monthly_html"
+            "gc_odoo_monthly_balance_custom.action_report_trial_balance_monthly_html"
         )
 
     def button_export_monthly_xlsx(self):
         return self._export_monthly(
-            "gc_odoo_account_report_custom.action_report_trial_balance_monthly_xlsx"
+            "gc_odoo_monthly_balance_custom.action_report_trial_balance_monthly_xlsx"
         )

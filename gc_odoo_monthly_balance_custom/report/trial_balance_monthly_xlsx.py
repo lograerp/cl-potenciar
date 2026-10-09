@@ -8,7 +8,7 @@ AMOUNT_HEADERS = {"debit": "Debe", "credit": "Haber", "balance": "Saldo"}
 
 
 class TrialBalanceMonthlyXslx(models.AbstractModel):
-    _name = "report.gc_odoo_account_report_custom.trial_balance_monthly_xlsx"
+    _name = "report.gc_odoo_monthly_balance_custom.trial_balance_xlsx"
     _description = "Sumas y saldos mensual XLSX"
     _inherit = "report.a_f_r.report_trial_balance_xlsx"
 
@@ -21,7 +21,7 @@ class TrialBalanceMonthlyXslx(models.AbstractModel):
 
     def _get_report_columns(self, report):
         monthly_report = self.env[
-            "report.gc_odoo_account_report_custom.trial_balance_monthly"
+            "report.gc_odoo_monthly_balance_custom.trial_balance_monthly"
         ]
         columns = [
             {"header": _("Código"), "field": "code", "width": 10},
@@ -89,7 +89,7 @@ class TrialBalanceMonthlyXslx(models.AbstractModel):
 
     def _generate_report_content(self, workbook, report, data, report_data):
         res_data = self.env[
-            "report.gc_odoo_account_report_custom.trial_balance_monthly"
+            "report.gc_odoo_monthly_balance_custom.trial_balance_monthly"
         ]._get_report_values(report, data)
         self.write_array_header(report_data)
         for balance in res_data["trial_balance"]:

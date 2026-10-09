@@ -11,7 +11,7 @@
             <t t-foreach="docs" t-as="o">
                 <t t-call="account_financial_report.internal_layout">
                     <t
-                        t-call="gc_odoo_account_report_custom.report_trial_balance_monthly_base"
+                        t-call="gc_odoo_monthly_balance_custom.report_trial_balance_monthly_base"
                     />
                 </t>
             </t>
@@ -73,7 +73,7 @@
                     <tbody>
                         <t t-foreach="trial_balance" t-as="balance">
                             <t
-                                t-call="gc_odoo_account_report_custom.report_trial_balance_monthly_line"
+                                t-call="gc_odoo_monthly_balance_custom.report_trial_balance_monthly_line"
                             />
                         </t>
                     </tbody>

@@ -8,9 +8,9 @@ from odoo.tests import tagged
 
 from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
-REPORT_MODEL = "report.gc_odoo_account_report_custom.trial_balance_monthly"
-HTML_REPORT_NAME = "gc_odoo_account_report_custom.trial_balance_monthly"
-XLSX_REPORT_NAME = "gc_odoo_account_report_custom.trial_balance_monthly_xlsx"
+REPORT_MODEL = "report.gc_odoo_monthly_balance_custom.trial_balance_monthly"
+HTML_REPORT_NAME = "gc_odoo_monthly_balance_custom.trial_balance_monthly"
+XLSX_REPORT_NAME = "gc_odoo_monthly_balance_custom.trial_balance_xlsx"
 AMOUNT_FIELDS = ("debit", "credit", "balance")
 
 
